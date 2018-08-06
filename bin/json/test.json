@@ -1,0 +1,102 @@
+{
+	"result": {
+		"log_id": "2115339807344296257",
+		"response": {
+			"schema": {
+				"intent_confidence": 100,
+				"slots": [],
+				"domain_confidence": 0,
+				"intent": "KBM_3969068441"
+			},
+			"qu_res": {
+				"intent_candidates": [{
+					"intent_confidence": 100,
+					"match_info": "金融有问题",
+					"slots": [],
+					"extra_info": {
+						"group_id": "-1",
+						"real_threshold": "1",
+						"threshold": "1"
+					},
+					"domain_confidence": 0,
+					"from_who": "pow-slu-lev1",
+					"intent": "KBM_3969068441",
+					"intent_need_clarify": false
+				}],
+				"qu_res_chosen": "{\"domain_confidence\":0.0,\"extra_info\":{\"group_id\":\"-1\",\"real_threshold\":\"1\",\"threshold\":\"1\"},\"from_who\":\"pow-slu-lev1\",\"intent\":\"KBM_3969068441\",\"intent_confidence\":100.0,\"intent_need_clarify\":false,\"match_info\":\"金融有问题\",\"slots\":[]}\n",
+				"sentiment_analysis": {
+					"pval": 0,
+					"label": "1"
+				},
+				"lexical_analysis": [{
+					"basic_word": ["金融"],
+					"weight": 0,
+					"term": "金融",
+					"type": "21"
+				}, {
+					"basic_word": ["有", "问题"],
+					"weight": 0,
+					"term": "有问题",
+					"type": "21"
+				}],
+				"raw_query": "金融有问题",
+				"status": 0,
+				"timestamp": 0
+			},
+			"action_list": [{
+				"action_id": "kbm_3969068441_satisfy",
+				"refine_detail": {
+					"option_list": [],
+					"interact": "",
+					"clarify_reason": ""
+				},
+				"confidence": 100,
+				"custom_reply": "{\"event_name\":\"EXEC\",\"func\":\"customReply\"}\n",
+				"say": "",
+				"type": "event"
+			}]
+		},
+		"bot_session": "{\"bot_id\":\"5726\",\"bot_views\":{\"bernard_res\":[{\"action_list\":[{\"action_id\":\"\",\"confidence\":0.0,\"custom_reply\":\"\",\"refine_detail\":{\"clarify_reason\":\"\",\"interact\":\"\",\"option_list\":[]},\"say\":\"\",\"type\":\"understood\"}],\"msg\":\"ok\",\"qu_res\":{\"intent_candidates\":[{\"domain_confidence\":0.0,\"extra_info\":{\"group_id\":\"-1\",\"real_threshold\":\"1\",\"threshold\":\"1\"},\"from_who\":\"pow-slu-lev1\",\"intent\":\"KBM_3969068441\",\"intent_confidence\":100.0,\"intent_need_clarify\":false,\"match_info\":\"金融有问题\",\"slots\":[]}],\"lexical_analysis\":[{\"basic_word\":[\"金融\"],\"term\":\"金融\",\"type\":\"21\",\"weight\":0.0},{\"basic_word\":[\"有\",\"问题\"],\"term\":\"有问题\",\"type\":\"21\",\"weight\":0.0}],\"qu_res_chosen\":\"{\\\"domain_confidence\\\":0.0,\\\"extra_info\\\":{\\\"group_id\\\":\\\"-1\\\",\\\"real_threshold\\\":\\\"1\\\",\\\"threshold\\\":\\\"1\\\"},\\\"from_who\\\":\\\"pow-slu-lev1\\\",\\\"intent\\\":\\\"KBM_3969068441\\\",\\\"intent_confidence\\\":100.0,\\\"intent_need_clarify\\\":false,\\\"match_info\\\":\\\"金融有问题\\\",\\\"slots\\\":[]}\\n\",\"raw_query\":\"金融有问题\",\"sentiment_analysis\":{\"label\":\"1\",\"pval\":0.0},\"status\":0,\"timestamp\":0},\"schema\":{\"domain_confidence\":0.0,\"intent\":\"KBM_3969068441\",\"intent_confidence\":100.0,\"slots\":[]},\"status\":0}],\"bernard_status\":[{\"index\":0,\"step\":\"AFTER_DM_TRIGGER\"}],\"intervention\":{\"qu_res_original\":\"\",\"query_original\":\"\",\"type\":\"\"},\"user_slots\":{}},\"dialog_state\":{\"contexts\":{},\"intents\":[{\"index\":0,\"name\":\"KBM_3969068441\"}],\"user_slots\":{}},\"interactions\":[{\"interaction_id\":\"interaction-1530085620460-3485780363-8013-2\",\"request\":{\"bernard_level\":0,\"client_session\":\"{\\\"client_results\\\":\\\"\\\", \\\"candidate_options\\\":[]}\",\"hyper_params\":{},\"query\":\"金融有问题\",\"query_info\":{\"asr_intent_candidates\":[],\"source\":\"K EYBOARD\",\"type\":\"TEXT\"},\"updates\":\"\",\"user_id\":\"88888\"},\"response\":{\"action_list\":[{\"action_id\":\"kbm_3969068441_satisfy\",\"confidence\":100.0,\"custom_reply\":\"{\\\"event_name\\\":\\\"EXEC\\\",\\\"func\\\":\\\"customReply\\\"}\\n\",\"refine_detail\":{\"clarify_reason\":\"\",\"interact\":\"\",\"option_list\":[]},\"say\":\"\",\"type\":\"event\"}],\"msg\":\"ok\",\"qu_res\":{\"intent_candidates\":[{\"domain_confidence\":0.0,\"extra_info\":{\"group_id\":\"-1\",\"real_threshold\":\"1\",\"threshold\":\"1\"},\"from_who\":\"pow-slu-lev1\",\"intent\":\"KBM_3969068441\",\"intent_confidence\":100.0,\"intent_need_clarify\":false,\"match_info\":\"金融有问题\",\"slots\":[]}],\"lexical_analysis\":[{\"basic_word\":[\"金融\"],\"term\":\"金融\",\"type\":\"21\",\"weight\":0.0},{\"basic_word\":[\"有\",\"问题\"],\"term\":\"有问题\",\"type\":\"21\",\"weight\":0.0}],\"qu_res_chosen\":\"{\\\"domain_confidence\\\":0.0,\\\"extra_info\\\":{\\\"group_id\\\":\\\"-1\\\",\\\"real_threshold\\\":\\\"1\\\",\\\"threshold\\\":\\\"1\\\"},\\\"from_who\\\":\\\"pow-slu-lev1\\\",\\\"intent\\\":\\\"KBM_3969068441\\\",\\\"intent_confidence\\\":100.0,\\\"intent_need_clarify\\\":false,\\\"match_info\\\":\\\"金融有问题\\\",\\\"slots\\\":[]}\\n\",\"raw_query\":\"金融有问题\",\"sentiment_analysis\":{\"label\":\"1\",\"pval\":0.0},\"status\":0,\"timestamp\":0},\"schema\":{\"domain_confidence\":0.0,\"intent\":\"KBM_3969068441\",\"intent_confidence\":100.0,\"slots\":[]},\"status\":0},\"timestamp\":\"2018-06-27 15:47:00.460\"}],\"session_id\":\"session-1530085620383-3485780363-8013-2\"}\n",
+		"interaction_id": "interaction-1530085620460-3485780363-8013-2",
+		"version": "2.0",
+		"bot_id": "5726",
+		"timestamp": "2018-06-27 15:47:00.460",
+		"qu_res": {
+			"intent_candidates": [{
+				"intent_confidence": 100,
+				"match_info": "金融有问题",
+				"slots": [],
+				"extra_info": {
+					"group_id": "-1",
+					"real_threshold": "1",
+					"threshold": "1"
+				},
+				"domain_confidence": 0,
+				"from_who": "pow-slu-lev1",
+				"intent": "KBM_3969068441",
+				"intent_need_clarify": false
+			}],
+			"qu_res_chosen": "{\"domain_confidence\":0.0,\"extra_info\":{\"group_id\":\"-1\",\"real_threshold\":\"1\",\"threshold\":\"1\"},\"from_who\":\"pow-slu-lev1\",\"intent\":\"KBM_3969068441\",\"intent_confidence\":100.0,\"intent_need_clarify\":false,\"match_info\":\"金融有问题\",\"slots\":[]}\n",
+			"sentiment_analysis": {
+				"pval": 0,
+				"label": "1"
+			},
+			"lexical_analysis": [{
+				"basic_word": ["金融"],
+				"weight": 0,
+				"term": "金融",
+				"type": "21"
+			}, {
+				"basic_word": ["有", "问题"],
+				"weight": 0,
+				"term": "有问题",
+				"type": "21"
+			}],
+			"raw_query": "金融有问题",
+			"status": 0,
+			"timestamp": 0
+		}
+	},
+	"error_msg": "ok",
+	"error_code": 0
+}]

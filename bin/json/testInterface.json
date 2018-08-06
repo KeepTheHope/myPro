@@ -1,0 +1,93 @@
+confirmUserUrl = http://180.166.1.229:1901/confirmUser
+{
+    "teamName":"城南班",
+    "userName":"张三",
+    "userPhone":"13812346789",
+    "sessonId":"sess123456"
+}
+
+
+getOperationContentUrl = http://180.166.1.229:1901/getOperationContent
+{
+    "teamName":"城南班",
+    "userName":"张三",
+    "userPhone":"13812346789",
+    "location":"城南变",
+    "workContent":"10kv阿里1线",
+    "operationContent":"10kv阿里1线运行改检修",
+    "czpNo":"czp12434",
+    "sessonId":"sess123456"
+}
+
+
+updateOperationTicketUrl = http://180.166.1.229:1901/updateOperationTicket
+{
+    "czpNo":"czp1234",
+    "contentNo":"cNo1234",
+    "operatonType":1,
+    "acceptTime":1523516545916,
+    "teamName":"城南班",
+    "userName":"张三",
+    "operationResult":{
+        "devName":"阿里112开关",
+        "type":1,
+        "devStatus":"合"
+    }
+}
+
+
+transferPhoneUrl = http://180.166.1.229:1901/transferPhone
+{
+    "czpNo":"czp1234",
+    "contentNo":"1",
+    "operationContent":"操作票编号为czp1234，操作内容为阿里1号线112开关从分到合",
+    "teamName":"城南班",
+    "userName":"张三"
+}
+
+
+
+postSessionContentUrl = http://180.166.1.229:1901/postSessionContent
+{
+    "sessionId":"sess1234",
+    "startTime":"1523516545916",
+    "endTime":"1523516545916",
+    "czpNo":"czp1234",
+    "sessionContent":[
+        {
+            "contentNo":"1",
+            "talkContent":[
+                {
+                    "time":"12:10:11",
+                    "talkerType":0,
+                    "talkerInfo":"虚拟坐席",
+                    "content":"刘昊，您好！您当前的工作内容是：江东0303线南沙新富2#变更换低压闸刀箱工作。确认请复诵工作内容"
+                },
+                {
+                    "time":"12:10:11",
+                    "talkerType":1,
+                    "talkerInfo":"刘昊(余杭县供电公司检修一班 13245671298)",
+                    "content":"清楚，我当前的工作内容为江东0303线南沙新富2#变更换低压闸刀箱工作"
+                }
+            ]
+        },
+        {
+            "contentNo":"2",
+            "talkContent":[
+                {
+                    "time":"12:10:11",
+                    "talkerType":0,
+                    "talkerInfo":"虚拟坐席",
+                    "content":"xx，您好！您当前的工作内容是：江东0303线南沙新富2#变更换低压闸刀箱工作。确认请复诵工作内容"
+                },
+                {
+                    "time":"12:10:11",
+                    "talkerType":0,
+                    "talkerInfo":"xx(余杭县供电公司检修一班 13245671298)",
+                    "content":"清楚，我当前的工作内容为江东0303线南沙新富2#变更换低压闸刀箱工作"
+                }
+            ]
+        }
+    ]
+}
+

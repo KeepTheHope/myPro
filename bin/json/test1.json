@@ -1,0 +1,46 @@
+参数格式
+{
+	"session_id": "",
+	"robot_id": "0194805272",
+	"query": "汽车保险",
+	"question_id": "",
+	"recommend": "1",
+	"related": "",
+	"channel_id": ""
+}
+返回结果格式
+
+{
+	"sessionId": "",
+	"singleNode": {
+		"questionId": "",
+		"answerMsg": null,
+		"score": 0,
+		"question": "",
+		"type": ""
+	},
+	"sendTime": "1529938321309",
+	"resultStatus": "0",
+	"answerTypeId": "0_1_1",
+	"vagueNode": {
+		"endVagueMsg": "不知道为您推荐的问题是否满意",
+		"promptVagueMsg": "抱歉我无法理解，但给您推荐",
+		"itemList": [{
+			"num": 1,
+			"questionId": "5388850651",
+			"score": 100,
+			"question": "如何用手机购汽车保险？"
+		}, {
+			"num": 2,
+			"questionId": "9387241637",
+			"score": 100,
+			"question": "购险后在哪儿能开正式发票？三个月前买的字还能开发票吗？开发票时需要带什么东西？"
+		}, {
+			"num": 3,
+			"questionId": "9549058401",
+			"score": 100,
+			"question": "已采购车险能退吗？"
+		}]
+	},
+	"rebotId": "0194805272"
+}

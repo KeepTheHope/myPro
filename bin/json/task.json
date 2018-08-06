@@ -1,0 +1,34 @@
+{
+	"teamName": "城南班",
+	"userName": "张三",
+	"userPhone": "13812346789",
+	"location": "城南变",
+	"workContent": "10kv阿里1线",
+	"operationContent": "10kv阿里1线运行改检修",
+	"czpNo": "czp12434",
+	"sessonId": "sess123456"
+}
+
+{
+	"apiId":"",
+	"sessionId":"",
+	"timestamp":"",
+	"robotId":"",
+	"nodeId":""
+}
+
+
+
+{
+	"content": "我是城南的王小二",
+	"list": [{
+		"city": "城南",
+		"name": "王小二"
+	}]
+}
+
+{
+		"workContent":"H7881线绿汀开关站-78812开",
+		"teamName":"绿汀开关站",
+		"userName":"zhangsan"
+}

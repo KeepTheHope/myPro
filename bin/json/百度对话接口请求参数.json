@@ -1,0 +1,25 @@
+//百度对话接口请求参数
+
+{
+	"bot_session": "",
+	"log_id": "3333",
+	"request": {
+		"bernard_level": 0,
+		"client_session": "3333",
+		"query": "中国人口",
+		"query_info": {
+			"asr_candidates": [],
+			"source": "K EYBOARD",
+			"type": "TEXT"
+		},
+		"updates": "",
+		"user_id": "88888"
+	},
+	"bot_id": 5726,
+	"version": "2.0"
+}
+
+15901419043
+yanbl013579
+
+
