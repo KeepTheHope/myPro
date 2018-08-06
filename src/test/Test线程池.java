@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
@@ -55,7 +57,7 @@ public class Test线程池 {
 		
 		
 		{	
-			/*ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
+			ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
 			for (int i = 0; i < 10; i++) {
 				final int index = i;
 				fixedThreadPool.execute(new Runnable() {
@@ -69,13 +71,13 @@ public class Test线程池 {
 						}
 					}
 				});
-			}*/
+			}
 		}
 		
 //====================================================================================================
 		
 		{
-			/*//创建一个定长线程池，支持定时及周期性任务执行
+			//创建一个定长线程池，支持定时及周期性任务执行
 			ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(5);
 			// 表示延迟3秒执行。
 			scheduledThreadPool.schedule(new Runnable() {
@@ -93,7 +95,7 @@ public class Test线程池 {
 					System.out.println("延迟1秒，每3秒执行一次");
 					System.err.println(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SSS").format(new Date()));
 				}
-			}, 1, 3, TimeUnit.SECONDS);*/
+			}, 1, 3, TimeUnit.SECONDS);
 			
 		}
 		
@@ -101,7 +103,7 @@ public class Test线程池 {
 		{
 //			创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行结果依次输出，相当于顺序执行各个任务	
 			
-			/*ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+			ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 			for (int i = 0; i < 10; i++) {
 				final int index = i;
 				singleThreadExecutor.execute(new Runnable() {
@@ -115,7 +117,7 @@ public class Test线程池 {
 						}
 					}
 				});
-			}*/
+			}
 		}
 	}
 }
