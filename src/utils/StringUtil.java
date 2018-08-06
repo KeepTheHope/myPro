@@ -1131,8 +1131,8 @@ public class StringUtil {
     
     /**
      * 将制定字符串首字母大写
-     * @param str
-     * @return
+     * @param str 需要处理的字符串
+     * @return 处理后的字符串
      */
     public static String initcap(String str) {
     	if(StringUtils.isBlank(str)) return str;
