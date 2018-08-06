@@ -2,6 +2,8 @@ package utils;
  
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
  
 /**
  * 
@@ -1126,5 +1128,18 @@ public class StringUtil {
             return str;
         }
     }
- 
+    
+    /**
+     * 将制定字符串首字母大写
+     * @param str
+     * @return
+     */
+    public static String initcap(String str) {
+    	if(StringUtils.isBlank(str)) return str;
+    	if(str.length() > 1) {
+    		return str.substring(0, 1).toUpperCase() + str.substring(1);
+    	}
+    	return str.toUpperCase();
+    }
+    
 }
