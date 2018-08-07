@@ -14,11 +14,12 @@ public class TestMapReduce {
 		list.add(new Order("键盘", 999.9, 200));
 		DoubleSummaryStatistics summ = list.stream().mapToDouble((obj) -> obj.getPrice() * obj.getAmount())
 				.summaryStatistics();
+		Double sumPrice = list.stream().map((obj) -> obj.getPrice() * obj.getAmount()).reduce((sum,x)->sum + x).get();
+		System.err.println("总消费：" + sumPrice);
 		System.out.println("总量:" + summ.getCount());
 		System.out.println("平均值:" + summ.getAverage());
 		System.out.println("最大:" + summ.getMax());
 		System.out.println("最小:" + summ.getMin());
-		System.err.println(99999.9*50);
 
 	}
 
