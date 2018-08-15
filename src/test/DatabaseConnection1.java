@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class DatabaseConnection {
+public class DatabaseConnection1 {
 	private static final String DBDRIVER = "org.gjt.mm.mysql.Driver";
 	
 	
