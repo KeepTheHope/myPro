@@ -1,0 +1,643 @@
+
+-- ----------------------------
+-- Table structure for kbm_answer
+-- ----------------------------
+DROP TABLE IF EXISTS kbm_answer;
+CREATE TABLE kbm_answer (
+  answer_id varchar(32) NOT NULL,
+  knowledge_id varchar(32) DEFAULT NULL,
+  answer_content varchar(512) DEFAULT NULL,
+  content_type char(2) DEFAULT NULL COMMENT '1、文本 2、声音',
+  type char(2) DEFAULT NULL COMMENT '1、对内 2、对外',
+  PRIMARY KEY (answer_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for kbm_baidu_scene
+-- ----------------------------
+DROP TABLE IF EXISTS kbm_baidu_scene;
+CREATE TABLE kbm_baidu_scene (
+  rel_id varchar(32) NOT NULL,
+  robot_id varchar(32) DEFAULT NULL,
+  baidu_scene_id varchar(32) DEFAULT NULL,
+  channel_id varchar(32) DEFAULT NULL,
+  PRIMARY KEY (rel_id),
+  KEY FK_Reference_39 (robot_id),
+  CONSTRAINT kbm_baidu_scene_ibfk_1 FOREIGN KEY (robot_id) REFERENCES rbc_robot (robot_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for kbm_content_ele
+-- ----------------------------
+DROP TABLE IF EXISTS kbm_content_ele;
+CREATE TABLE kbm_content_ele (
+  ele_id varchar(32) NOT NULL,
+  type char(2) DEFAULT NULL COMMENT '类型：1、文本  2、声音 3、图片 4、视频',
+  name varchar(32) DEFAULT NULL COMMENT '自定义：如  name、url、path',
+  value varchar(512) DEFAULT NULL,
+  sort int(11) DEFAULT NULL,
+  parent_id varchar(32) DEFAULT NULL COMMENT '根元素为root',
+  data_id varchar(32) DEFAULT NULL,
+  rel_table_type char(2) DEFAULT NULL COMMENT '1、问题库  2、答案库',
+  PRIMARY KEY (ele_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for kbm_knowledge
+-- ----------------------------
+DROP TABLE IF EXISTS kbm_knowledge;
+CREATE TABLE kbm_knowledge (
+  knowledge_id varchar(32) NOT NULL,
+  knowledge_type_id varchar(32) DEFAULT NULL,
+  name varchar(128) DEFAULT NULL,
+  valid_channel varchar(32) DEFAULT NULL COMMENT '多个用逗号隔开',
+  valid_start_time datetime DEFAULT NULL COMMENT '立即生效：开始时间为当前时间         结束时间为开始时间+20年',
+  valid_end_time datetime DEFAULT NULL,
+  create_user_id varchar(64) DEFAULT NULL,
+  create_time datetime DEFAULT NULL,
+  delete_flag char(1) DEFAULT NULL COMMENT '1、删除  0、未删除',
+  invalid_flag char(1) DEFAULT NULL COMMENT '1、无效   0、有效',
+  browse_num int(11) DEFAULT NULL,
+  update_time datetime DEFAULT NULL,
+  PRIMARY KEY (knowledge_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for kbm_knowledge_type
+-- ----------------------------
+DROP TABLE IF EXISTS kbm_knowledge_type;
+CREATE TABLE kbm_knowledge_type (
+  knowledge_type_id varchar(32) NOT NULL,
+  name varchar(32) DEFAULT NULL,
+  parent_id varchar(32) DEFAULT NULL,
+  PRIMARY KEY (knowledge_type_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统库';
+
+-- ----------------------------
+-- Table structure for kbm_profession_word
+-- ----------------------------
+DROP TABLE IF EXISTS kbm_profession_word;
+CREATE TABLE kbm_profession_word (
+  profession_id varchar(32) NOT NULL,
+  word_type_id varchar(32) DEFAULT NULL,
+  word varchar(64) DEFAULT NULL,
+  create_time datetime DEFAULT NULL,
+  create_user_id varchar(32) DEFAULT NULL,
+  PRIMARY KEY (profession_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for kbm_question
+-- ----------------------------
+DROP TABLE IF EXISTS kbm_question;
+CREATE TABLE kbm_question (
+  question_id varchar(32) NOT NULL,
+  knowledge_id varchar(32) DEFAULT NULL,
+  question_content varchar(256) DEFAULT NULL,
+  sort int(11) DEFAULT NULL,
+  PRIMARY KEY (question_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for kbm_question_intell
+-- ----------------------------
+DROP TABLE IF EXISTS kbm_question_intell;
+CREATE TABLE kbm_question_intell (
+  intell_question_id varchar(32) NOT NULL,
+  session_id varchar(32) DEFAULT NULL,
+  channel_id varchar(32) DEFAULT NULL,
+  question_id varchar(32) DEFAULT NULL,
+  content varchar(256) DEFAULT NULL,
+  call_time datetime DEFAULT NULL,
+  patter_id varchar(32) DEFAULT NULL,
+  source char(2) DEFAULT NULL COMMENT '1、在线   2、电话',
+  line_num int(11) DEFAULT NULL,
+  create_time datetime DEFAULT NULL,
+  PRIMARY KEY (intell_question_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for kbm_question_semantic
+-- ----------------------------
+DROP TABLE IF EXISTS kbm_question_semantic;
+CREATE TABLE kbm_question_semantic (
+  semantic_id varchar(32) NOT NULL,
+  question_id varchar(32) DEFAULT NULL,
+  content varchar(128) DEFAULT NULL,
+  source char(2) DEFAULT NULL COMMENT '1、百度   2、阿里 3、科大讯飞',
+  PRIMARY KEY (semantic_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for kbm_question_unknown
+-- ----------------------------
+DROP TABLE IF EXISTS kbm_question_unknown;
+CREATE TABLE kbm_question_unknown (
+  un_question_id varchar(32) NOT NULL,
+  session_id varchar(32) DEFAULT NULL,
+  channel_id varchar(32) DEFAULT NULL,
+  content varchar(256) DEFAULT NULL,
+  call_time datetime DEFAULT NULL,
+  patter_id varchar(32) DEFAULT NULL,
+  source char(2) DEFAULT NULL COMMENT '1、在线   2、电话',
+  line_num int(11) DEFAULT NULL,
+  create_time datetime DEFAULT NULL,
+  PRIMARY KEY (un_question_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='\r\n在线：添加到知识库\r\n电话：定位到话术，进行调整';
+
+-- ----------------------------
+-- Table structure for kbm_recommend
+-- ----------------------------
+DROP TABLE IF EXISTS kbm_recommend;
+CREATE TABLE kbm_recommend (
+  recommend_id varchar(32) NOT NULL,
+  knowledge_id varchar(32) DEFAULT NULL,
+  recommend_knowledge_id varchar(32) DEFAULT NULL,
+  sort int(11) DEFAULT NULL,
+  PRIMARY KEY (recommend_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for kbm_synonym
+-- ----------------------------
+DROP TABLE IF EXISTS kbm_synonym;
+CREATE TABLE kbm_synonym (
+  synonym_id varchar(32) NOT NULL,
+  word varchar(64) DEFAULT NULL,
+  synonym_word varchar(1024) DEFAULT NULL,
+  create_time datetime DEFAULT NULL,
+  create_user_id varchar(32) DEFAULT NULL,
+  PRIMARY KEY (synonym_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for kbm_word_type
+-- ----------------------------
+DROP TABLE IF EXISTS kbm_word_type;
+CREATE TABLE kbm_word_type (
+  word_type_id varchar(32) NOT NULL,
+  name varchar(32) DEFAULT NULL,
+  parent_id varchar(32) DEFAULT NULL,
+  PRIMARY KEY (word_type_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_attr
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_attr;
+CREATE TABLE rbc_attr (
+  attr_id varchar(32) NOT NULL,
+  name varchar(32) DEFAULT NULL,
+  value varchar(128) DEFAULT NULL,
+  parent_id varchar(32) DEFAULT NULL COMMENT '根节点为root',
+  type char(1) DEFAULT NULL COMMENT '1、场景   2、话术节点   3、意图关系',
+  data_id varchar(32) DEFAULT NULL COMMENT '根据不同类型，关联不同的数据表',
+  sort int(11) DEFAULT NULL,
+  PRIMARY KEY (attr_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_data_ent_rel
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_data_ent_rel;
+CREATE TABLE rbc_data_ent_rel (
+  rel_id varchar(32) NOT NULL,
+  ent_id varchar(32) DEFAULT NULL,
+  table_name varchar(32) DEFAULT NULL,
+  record_id varchar(32) DEFAULT NULL,
+  PRIMARY KEY (rel_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_dim_channel
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_dim_channel;
+CREATE TABLE rbc_dim_channel (
+  channel_id varchar(32) NOT NULL,
+  name varchar(32) DEFAULT NULL,
+  PRIMARY KEY (channel_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_ent
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_ent;
+CREATE TABLE rbc_ent (
+  ent_id varchar(32) NOT NULL,
+  name varchar(32) DEFAULT NULL,
+  info varchar(512) DEFAULT NULL,
+  rbc_init_flag char(1) DEFAULT NULL COMMENT '1、已经初始化    0、未初始化',
+  kbm_init_flag char(1) DEFAULT NULL COMMENT '1、已经初始化    0、未初始化',
+  create_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (ent_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_interface_def
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_interface_def;
+CREATE TABLE rbc_interface_def (
+  interface_id varchar(32) NOT NULL,
+  name varchar(64) DEFAULT NULL,
+  info varchar(512) DEFAULT NULL,
+  para varchar(512) DEFAULT NULL COMMENT 'JSON格式',
+  result varchar(512) DEFAULT NULL,
+  addr varchar(32) DEFAULT NULL,
+  type char(3) DEFAULT NULL COMMENT '1、计算节点API   2、变量API',
+  request_type char(3) DEFAULT NULL COMMENT '1、api    2、http-post    3、http-get',
+  ent_id varchar(32) DEFAULT NULL,
+  PRIMARY KEY (interface_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_patter
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_patter;
+CREATE TABLE rbc_patter (
+  patter_id varchar(32) NOT NULL,
+  patter_type_id varchar(32) DEFAULT NULL,
+  name varchar(64) DEFAULT NULL,
+  create_user_id varchar(32) DEFAULT NULL,
+  create_time datetime DEFAULT NULL,
+  info varchar(128) DEFAULT NULL,
+  type char(1) DEFAULT NULL COMMENT '1、文本  2、声音',
+  content varchar(1024) DEFAULT NULL COMMENT '格式为一个JSON:\n            [{"t":"text","v":"您好,"},{"t":"variateId","v":"ROBOT23"},{"t":"videoId","v":"123"},{"t":"text","v":",您有一笔欠款，一直未归还，请问您计划何时还款？"}]\n            \n            其中t为类型，说明：\n            text              文本\n            variateId      变量ID\n    ',
+  delete_flag char(1) DEFAULT NULL COMMENT '1、删除   0、未删除',
+  invalid_flag char(1) DEFAULT NULL COMMENT '1、无效   0、有效',
+  update_time datetime DEFAULT NULL,
+  intention_count int(11) DEFAULT '0',
+  show_content varchar(1024) DEFAULT NULL,
+  ent_id varchar(32) DEFAULT '',
+  built_in_type char(2) DEFAULT '0',
+  PRIMARY KEY (patter_id),
+  KEY FK_Reference_1 (patter_type_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_patter_condition
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_patter_condition;
+CREATE TABLE rbc_patter_condition (
+  condition_id varchar(32) NOT NULL,
+  intention_id varchar(32) DEFAULT NULL,
+  type char(2) DEFAULT NULL COMMENT '类型：1、等待N秒  2、父节点重复N此',
+  name varchar(64) DEFAULT NULL,
+  content varchar(64) DEFAULT NULL,
+  next_rel char(2) DEFAULT NULL COMMENT '关系： 1、与  2、或  3、非',
+  sort int(11) DEFAULT NULL,
+  ent_id varchar(32) DEFAULT NULL,
+  PRIMARY KEY (condition_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_patter_intention
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_patter_intention;
+CREATE TABLE rbc_patter_intention (
+  intention_id varchar(32) NOT NULL,
+  patter_id varchar(32) DEFAULT NULL,
+  inten_type_id varchar(32) DEFAULT NULL,
+  name varchar(32) DEFAULT NULL,
+  sort int(11) DEFAULT NULL,
+  alias varchar(32) DEFAULT NULL,
+  info varchar(128) DEFAULT NULL,
+  type char(2) DEFAULT NULL COMMENT '意图类型：1、条件     2、意向词',
+  ent_id varchar(32) DEFAULT NULL,
+  built_in_flag char(2) DEFAULT '0',
+  dict_ids varchar(256) DEFAULT NULL,
+  PRIMARY KEY (intention_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_patter_intention_type
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_patter_intention_type;
+CREATE TABLE rbc_patter_intention_type (
+  inten_type_id varchar(32) NOT NULL,
+  name varchar(64) DEFAULT NULL,
+  sort int(11) DEFAULT NULL,
+  ent_id varchar(32) DEFAULT NULL,
+  PRIMARY KEY (inten_type_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_patter_intention_word
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_patter_intention_word;
+CREATE TABLE rbc_patter_intention_word (
+  intention_word_id varchar(32) NOT NULL,
+  intention_id varchar(32) DEFAULT NULL,
+  type char(2) DEFAULT NULL COMMENT '1、普通文本   、正则',
+  content varchar(32) DEFAULT NULL,
+  sort int(11) DEFAULT NULL,
+  ent_id varchar(32) DEFAULT NULL,
+  detail varchar(1024) DEFAULT NULL,
+  PRIMARY KEY (intention_word_id),
+  KEY FK_Reference_3 (intention_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_patter_type
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_patter_type;
+CREATE TABLE rbc_patter_type (
+  patter_type_id varchar(32) NOT NULL,
+  name varchar(32) DEFAULT NULL,
+  info varchar(128) DEFAULT NULL,
+  create_user_id varchar(32) DEFAULT NULL,
+  create_time datetime DEFAULT NULL,
+  parent_id varchar(32) DEFAULT NULL,
+  ent_id varchar(32) DEFAULT NULL,
+  PRIMARY KEY (patter_type_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_patter_variate
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_patter_variate;
+CREATE TABLE rbc_patter_variate (
+  variate_id varchar(32) NOT NULL,
+  show_name varchar(32) DEFAULT NULL,
+  var_name varchar(32) DEFAULT NULL,
+  info varchar(128) DEFAULT NULL,
+  data_interface varchar(256) DEFAULT NULL COMMENT 'http rest 接口',
+  sort int(11) DEFAULT NULL,
+  ent_id varchar(32) NOT NULL,
+  type char(2) DEFAULT NULL,
+  PRIMARY KEY (variate_id,ent_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_patter_video
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_patter_video;
+CREATE TABLE rbc_patter_video (
+  video_id varchar(32) NOT NULL,
+  patter_id varchar(32) DEFAULT NULL,
+  file_name varchar(128) DEFAULT NULL,
+  show_name varchar(128) DEFAULT NULL,
+  upload_time datetime DEFAULT NULL,
+  ent_id varchar(32) DEFAULT NULL,
+  PRIMARY KEY (video_id),
+  KEY FK_Reference_18 (patter_id),
+  CONSTRAINT rbc_patter_video_ibfk_1 FOREIGN KEY (patter_id) REFERENCES rbc_patter (patter_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_robot
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_robot;
+CREATE TABLE rbc_robot (
+  robot_id varchar(32) NOT NULL,
+  name varchar(64) DEFAULT NULL,
+  info varchar(512) DEFAULT NULL,
+  type char(1) DEFAULT NULL COMMENT '1、在线   2、电话',
+  sign varchar(64) DEFAULT NULL,
+  welcome_speech varchar(512) DEFAULT NULL,
+  ignorant_reply varchar(2048) DEFAULT NULL COMMENT 'json格式\n            [\n               {"text","这个是大学生的知识，我才上小学！嘿嘿"},\n               {"text","AABBCC"}\n            \n            ]\n            ',
+  ignorant_type char(1) DEFAULT NULL,
+  ignorant_num int(11) DEFAULT NULL COMMENT '无答复N次数转人工',
+  photo_path varchar(64) DEFAULT NULL,
+  create_user_id varchar(32) DEFAULT NULL,
+  create_time datetime DEFAULT NULL,
+  update_time datetime DEFAULT NULL,
+  delete_flag char(1) DEFAULT NULL COMMENT '1、删除   0、未删除',
+  invalid_flag char(1) DEFAULT NULL COMMENT '1、无效   0、有效',
+  file_name varchar(64) DEFAULT NULL,
+  publish_flag char(2) DEFAULT NULL COMMENT '0、未发布  1、正在发布  2、发布成功 3、发布失败',
+  ent_id varchar(32) DEFAULT NULL,
+  built_in_type char(2) DEFAULT NULL COMMENT '0、内置  1、自定义',
+  PRIMARY KEY (robot_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_robot_knowledge_rel
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_robot_knowledge_rel;
+CREATE TABLE rbc_robot_knowledge_rel (
+  robot_id varchar(32) DEFAULT NULL,
+  knowledge_type_id varchar(32) DEFAULT NULL,
+  ent_id char(32) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_robot_scene_rel
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_robot_scene_rel;
+CREATE TABLE rbc_robot_scene_rel (
+  robot_id varchar(32) DEFAULT NULL,
+  scene_id varchar(32) DEFAULT NULL,
+  access_num varchar(32) DEFAULT NULL,
+  KEY FK_Reference_20 (robot_id),
+  KEY FK_Reference_22 (scene_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_scene
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_scene;
+CREATE TABLE rbc_scene (
+  scene_id varchar(32) NOT NULL,
+  name varchar(64) DEFAULT NULL,
+  create_user_id varchar(32) DEFAULT NULL,
+  create_time datetime DEFAULT NULL,
+  delete_flag char(1) DEFAULT NULL COMMENT '1、删除   0、未删除',
+  invalid_flag char(1) DEFAULT NULL COMMENT '1、无效   0、有效',
+  update_time datetime DEFAULT NULL,
+  ent_id varchar(32) DEFAULT NULL,
+  first_node_id varchar(32) DEFAULT NULL,
+  PRIMARY KEY (scene_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_scene_intention_rel
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_scene_intention_rel;
+CREATE TABLE rbc_scene_intention_rel (
+  rel_id varchar(32) NOT NULL,
+  node_id varchar(32) DEFAULT NULL,
+  intention_id varchar(32) DEFAULT NULL,
+  next_node_id varchar(32) DEFAULT NULL,
+  sort int(11) DEFAULT NULL,
+  ent_id varchar(32) DEFAULT NULL,
+  PRIMARY KEY (rel_id),
+  KEY FK_Reference_27 (node_id),
+  KEY FK_Reference_29 (intention_id),
+  CONSTRAINT rbc_scene_intention_rel_ibfk_1 FOREIGN KEY (node_id) REFERENCES rbc_scene_patter_node (node_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_scene_patter_node
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_scene_patter_node;
+CREATE TABLE rbc_scene_patter_node (
+  node_id varchar(32) NOT NULL,
+  scene_id varchar(32) DEFAULT NULL,
+  patter_id varchar(32) DEFAULT NULL,
+  type char(2) DEFAULT NULL COMMENT '1、起始节点  2、结束节点 ',
+  ent_id varchar(32) DEFAULT NULL,
+  PRIMARY KEY (node_id),
+  KEY FK_Reference_25 (scene_id),
+  KEY FK_Reference_28 (patter_id),
+  CONSTRAINT rbc_scene_patter_node_ibfk_1 FOREIGN KEY (scene_id) REFERENCES rbc_scene (scene_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_slot_clarify
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_slot_clarify;
+CREATE TABLE rbc_slot_clarify (
+  clarify_id varchar(32) NOT NULL,
+  intention_word_id varchar(32) DEFAULT NULL,
+  dict_id varchar(32) DEFAULT NULL,
+  example varchar(32) DEFAULT NULL,
+  patter varchar(32) DEFAULT NULL,
+  sort varchar(32) DEFAULT NULL,
+  ent_id varchar(32) DEFAULT NULL,
+  PRIMARY KEY (clarify_id),
+  KEY FK_Reference_32 (dict_id),
+  KEY FK_Reference_4 (intention_word_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_slot_dict
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_slot_dict;
+CREATE TABLE rbc_slot_dict (
+  dict_id varchar(32) NOT NULL,
+  name varchar(32) DEFAULT NULL,
+  parent_id varchar(32) DEFAULT NULL COMMENT '节点：\n            1、根节点是                   root\n            2、自定义词槽                user            \n            3、供应商词槽（百度）   provider_baidu',
+  sort int(11) DEFAULT NULL,
+  en_name varchar(20) DEFAULT NULL COMMENT '支持小写字母、数字、下划线\n            \n            ',
+  type char(2) DEFAULT NULL,
+  ent_id varchar(32) DEFAULT NULL,
+  PRIMARY KEY (dict_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_slot_word
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_slot_word;
+CREATE TABLE rbc_slot_word (
+  word_id varchar(255) NOT NULL,
+  dict_id varchar(32) DEFAULT NULL,
+  name varchar(64) DEFAULT NULL,
+  alias varchar(2048) DEFAULT NULL COMMENT '多个用逗号隔开',
+  create_time datetime DEFAULT NULL,
+  create_user_id varchar(32) DEFAULT NULL,
+  ent_id varchar(32) DEFAULT NULL,
+  space varchar(32) DEFAULT NULL COMMENT '格式：0-2,0-3',
+  PRIMARY KEY (word_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_slot_word_bak
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_slot_word_bak;
+CREATE TABLE rbc_slot_word_bak (
+  word_id varchar(32) NOT NULL,
+  dict_id varchar(32) DEFAULT NULL,
+  name varchar(64) DEFAULT NULL,
+  alias varchar(2048) DEFAULT NULL COMMENT '多个用逗号隔开',
+  create_time datetime DEFAULT NULL,
+  create_user_id varchar(32) DEFAULT NULL,
+  ent_id varchar(32) DEFAULT NULL,
+  space varchar(32) DEFAULT NULL COMMENT '格式：0-2,0-3',
+  PRIMARY KEY (word_id),
+  KEY FK_Reference_31 (dict_id),
+  CONSTRAINT rbc_slot_word_bak_ibfk_1 FOREIGN KEY (dict_id) REFERENCES rbc_slot_dict (dict_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_sys
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_sys;
+CREATE TABLE rbc_sys (
+  sys_id varchar(32) NOT NULL,
+  name varchar(64) DEFAULT NULL,
+  info varchar(128) DEFAULT NULL,
+  PRIMARY KEY (sys_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_sys_conf
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_sys_conf;
+CREATE TABLE rbc_sys_conf (
+  conf_id varchar(32) NOT NULL,
+  name varchar(64) DEFAULT NULL COMMENT '包名的结构样式\n            如： com.a.b.c',
+  value varchar(64) DEFAULT NULL,
+  info varchar(512) DEFAULT NULL,
+  PRIMARY KEY (conf_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='知识库设计';
+
+-- ----------------------------
+-- Table structure for rbc_sys_dict
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_sys_dict;
+CREATE TABLE rbc_sys_dict (
+  dict_id varchar(32) NOT NULL,
+  name varchar(64) DEFAULT NULL,
+  value varchar(64) DEFAULT NULL,
+  sort int(11) DEFAULT NULL,
+  parent_id varchar(32) DEFAULT NULL COMMENT 'word_type   词槽澄清中的词类型（日期、时间、地点、品牌）',
+  PRIMARY KEY (dict_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_user
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_user;
+CREATE TABLE rbc_user (
+  user_id varchar(32) NOT NULL,
+  name varchar(64) DEFAULT NULL,
+  phone varchar(16) DEFAULT NULL,
+  paasword varchar(32) DEFAULT NULL,
+  ent_id varchar(32) DEFAULT NULL,
+  PRIMARY KEY (user_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for rbc_user_ent_rel
+-- ----------------------------
+DROP TABLE IF EXISTS rbc_user_ent_rel;
+CREATE TABLE rbc_user_ent_rel (
+  ent_id varchar(32) DEFAULT NULL,
+  user_id varchar(32) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for sequence
+-- ----------------------------
+DROP TABLE IF EXISTS sequence;
+CREATE TABLE sequence (
+  name varchar(50) NOT NULL,
+  current_value int(11) NOT NULL,
+  prefix varchar(32) DEFAULT '',
+  increment int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TRIGGER IF EXISTS sortIncrease;
+DELIMITER ;;
+CREATE TRIGGER sortIncrease BEFORE INSERT ON kbm_question FOR EACH ROW begin
+	 set @tmpsort = (select max(sort) from kbm_question where knowledge_id = new.knowledge_id);
+	 if @tmpsort is null then
+		set new.sort = 1;
+	 else
+		 set new.sort = @tmpsort + 1;
+	 end if;
+end
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS sortIncrea;
+DELIMITER ;;
+CREATE TRIGGER sortIncrea BEFORE INSERT ON rbc_patter_condition FOR EACH ROW begin 
+	 set @tmpsort = (select max(sort) from rbc_patter_condition where intention_id = new.intention_id);
+	 if @tmpsort is null then
+		set new.sort = 1;
+	 else
+		 set new.sort = @tmpsort + 1;
+	 end if;
+end
+;;
+DELIMITER ;

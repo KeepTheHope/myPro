@@ -9,9 +9,9 @@ public class DatabaseConnection {
 	private static final String DBDRIVER = "org.gjt.mm.mysql.Driver";
 	
 	
-	private static final String DBURL = "jdbc:mysql://localhost:3306/mldn";
+	private static final String DBURL = "jdbc:mysql://192.168.1.201:3306/ali";
 	private static final String USER = "root";
-	private static final String PASSWORD = "";
+	private static final String PASSWORD = "123456";
 
 	public static void main(String[] args) throws Exception {
 		Class.forName(DBDRIVER) ;
